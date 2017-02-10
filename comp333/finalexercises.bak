@@ -1,0 +1,7 @@
+#lang racket
+(define f1
+  (lambda (a k)
+    (if (null? a)
+        '()
+        (cons k (fl (cdr a )(+k 1)))
+        )))s

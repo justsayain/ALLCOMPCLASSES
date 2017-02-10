@@ -1,0 +1,47 @@
+#lang racket
+(define fact
+(lambda (n)
+  (if (= n 0) 1
+      (* n (fact (- n 1))))))
+(display "You guys are da wurst")
+(define coeff 
+  (lambda (lst t) 
+    (cond 
+      ((null? lst)
+       "not here"
+       )
+      ((equal? t (car (car lst)))
+       (car (car lst))
+       )
+      (else (coeff (cdr lst) t)))))
+(define expon 
+  (lambda (lst t)
+    (cond 
+      ((null? lst) "none of it"
+                   )
+      ((equal? t (car (car lst)))
+       (car(cdr(car lst)))
+       )
+      (else (expon (cdr lst) t)))))
+(define printTerm
+  (lambda (lst t)
+    (cond 
+      ((null? lst) "nope stahp it")
+      ((equal? t (car (car lst)))
+       (display (coeff lst t))
+       (display "x^")
+       (display (expon lst t)))
+       (else (printTerm (cdr lst) t)))))
+(define printPoly
+  (lambda (lst)
+    (cond
+      ((null? lst) "nah still da wurst")
+      (else 
+       (display(printTerm lst (car(car lst))))
+       (printPoly (cdr lst) )))))
+(newline)
+(coeff '((2 3)(3 4)( 4 5)) 4)
+(expon '((2 3)(3 4)( 4 5)) 4)
+(printTerm '((2 3)(3 4)( 4 5)) 4)
+(newline)
+(printPoly '((2 3)(3 4)( 4 5)))

@@ -1,0 +1,10 @@
+#lang racket
+(define nextchar '())
+(define pos 0)
+(define tokenList '())
+(define parse 
+  (lambda  (inputstring)
+     (set!    tokenList   (removeSpaces ( string->list     inputstring)  ) )
+      ;display the tokenlist
+      ( start)  )  )
+(define start)

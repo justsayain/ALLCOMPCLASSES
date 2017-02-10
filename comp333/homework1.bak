@@ -1,0 +1,27 @@
+#lang racket
+(define (palindrome? l) 
+  
+   ; Return true iff the given list is an element-by-element palindrome.  
+  
+   (let ((l1 l) (l2 (reverse l))) 
+  
+     (cond 
+        ((null? l1) 
+           #t) 
+  
+        ((eq? (car l1) (car l2)) 
+           ;(lp? (cdr l1) (cdr l2))
+         ) 
+  
+        (#t 
+           #f))))
+(define count
+  (lambda (t lst)
+    (let* ([x 0])
+    (cond
+      ((null? lst) x)
+      (else
+       (cond
+         ((equal? t (car lst)) (+ 1 x))
+         (else
+          ((count t (cdr lst))))))))))
