@@ -1,7 +1,0 @@
-Butterfly
-CAT
-dog
-Monkey
-Monkey1
-subfolder1
-subfolder2
