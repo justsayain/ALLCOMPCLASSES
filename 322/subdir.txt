@@ -1,0 +1,23 @@
+Script started on Mon 12 May 2014 11:12:31 PM PDT
+$ 
+$ ls
+AccessCommandLine.c  project5.c		 sort2.txt
+a.out		     project6.c		 sortsub.txt
+helloworld.c	     project6.txt	 sort.txt
+p6test.c	     proo6.c		 subdir.txt
+pf.c		     proo6.c.save	 subfolder1
+pratice		     pTest1.c		 subfolder2
+pro6.c		     pTest.c		 testnull.c
+project2.c	     RosanneRogelp4test  test.txt
+project3.c	     RosanneRogelP5
+project4.c	     scripttest.txt
+$ pwd
+/home/users1/rsr48631/322
+$ wdc  c ptest.c
+wc: ptest.c: No such file or directory
+$ wc testnull.c
+1 0 3 testnull.c
+$ 
+$ 
+
+Script done on Mon 12 May 2014 11:12:51 PM PDT

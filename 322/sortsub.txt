@@ -1,0 +1,11 @@
+Script started on Mon 12 May 2014 11:11:32 PM PDT
+$ 
+$ hello my name is crazy 
+ksh: hello: not found [No such file or directory]
+$ 
+$ ()^[[D you aner    are f crazy
+ksh: syntax error: `)' unexpected
+$ 
+$ 
+
+Script done on Mon 12 May 2014 11:11:58 PM PDT

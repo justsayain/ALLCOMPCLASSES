@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      html{height: 100%; background-color: grey;}
+      body { 
+        height: 70%;
+        margin: 0px; 
+        width: 100%;
+        padding: 20px; 
+        background-color: blue;
+      }
+      input{
+        border-style: solid;
+      }
+      #circle{
+
+      }
+      #received { 
+        position: relative;
+        width: 40%; 
+        height: 40%; 
+        border: 1px;
+        border-style: solid; 
+        overflow-y:scroll;
+        background-color: white;
+      }
+      #sent { width: 20% }
+      #lightBox { 
+        position: absolute;
+        z-index: 2;
+        height: 40%;
+        width: 40%;
+        margin-left: 45%;
+        padding: 40px;
+        background-color: purple; 
+      }
+      #lightContainer{
+        position: absolute;
+        z-index: 3;
+        height:80%;
+        width: 25%;
+        margin-left: 10%;
+        padding: 0;
+        background-color: yellow;
+      }
+      #lightContainer2{
+        position: absolute;
+        z-index: 3;
+        height:80%;
+        width: 25%;
+        margin-left:50%;
+        padding: 0;
+        background-color: yellow;
+      }
+      .light{
+        border-radius: 60%;
+        margin-left: 20%;
+        margin-top: 5%;
+        width: 60%;
+        height: 30%;
+        background-color: black;
+      }
+      #modifyContainer{
+        margin-top: 8%;
+        height: 100%;
+        width: 80%;
+        position: relative;
+      }
+      #modifyMain{
+        background-color: white;
+        width: 48.5%;
+        height: 60%;
+        float: left;
+        border-style: solid;
+      }
+      #modifyStreet{
+        background-color: yellow;        
+        width: 50.2%;
+        height: 60%;
+        float: right;
+        border-style: solid;
+      }
+      #modifySend{
+        float: right;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" >
+      $(document).ready(function(){
+      var received = $('#received');
+      //var socket = new WebSocket("ws://localhost:8080/ws");
+      var g1 = document.getElementById("G1");
+      var y1 = document.getElementById("Y1");
+      var b1 = document.getElementById("B1");
+      var g2 = document.getElementById("G2");
+      var y2 = document.getElementById("Y2");
+      var b2 = document.getElementById("B2");
+       
+      // socket.onopen = function(){  
+      //   console.log("connected"); 
+      // }; 
+
+      // socket.onmessage = function (message) {
+      //   console.log("receiving: " + message.data);
+      //   received.append(message.data);
+      //   received.append($('<br/>'));
+      // };
+
+      // socket.onclose = function(){
+      //   console.log("disconnected"); 
+      // };
+
+      // var sendMessage = function(message) {
+      //   console.log("sending:" + message.data);
+      //   socket.send(message.data);
+      // };
+
+      // send a command to the serial port
+      $("#cmd_send").click(function(ev){
+        ev.preventDefault();
+        var cmd = $('#cmd_value').val();
+        sendMessage({ 'data' : cmd});
+        $('#cmd_value').val("");
+      });
+
+      $('#clear').click(function(){
+        received.empty();
+      });
+
+      $(document).ready(function(){
+        $("#light1").css('background-color','green');
+      });
+      $(document).ready(function(){
+        $("#light6").css('background-color','red');
+      });
+
+});
+    </script>
+  </head>
+  <body>
+  <h1>Websockets serial console</h1>
+
+  <p>Data received from serial port</p>
+  <div id = "lightBox">
+    <div id = "lightContainer">
+      <div id = "light1" class = "light"></div>
+      <div id = "light2" class = "light"></div>
+      <div id = "light3" class = "light"></div>    
+    </div>
+    <div id = "lightContainer2">
+      <div id = "light4" class = "light"></div>
+      <div id = "light5" class = "light"></div>
+      <div id = "light6" class = "light"></div>    
+    </div>
+
+  </div>
+  <div id="received">
+
+  </div>
+  <button id="clear">Clear</button>
+  
+  <p>Send data to serial port</p>
+  <form id="sent">
+    <input type="text" id="cmd_value">
+    <button id="cmd_send">Send</button>
+  </form>
+  <div id = "modifyContainer">
+    <div id = "modifyMain">
+      <form>
+        <p>Change Green Main</p>
+        <input type="text" id = "G1" placeholder="Green Main"></input>
+        <p>Change Yellow Main</p>
+        <input type="text" id = "Y1" placeholder="Yellow Main"></input>
+        <p>Change Blinking Main</p>
+        <input type="text" id = "B1" placeholder="Blinking Main"></input>
+      </form>
+    </div>
+    <div id = "modifyStreet">
+      <form>
+        <p>Change Green Other Street</p>
+        <input type="text" id = "G2" placeholder="Green Other"></input>
+        <p>Change Yellow Other Street</p>
+        <input type="text" id = "Y2"placeholder="Yellow Other"></input>
+        <p>Change Yellow Other Street</p>
+        <input type="text" id = "B2" placeholder="Blinking Other"></input>
+      </form>
+    </div>
+    <button id="modifySend">Send</button>
+  </div>
+  </body>
+</html>
+<!-- 
+https://gist.github.com/yasinyaman/1397878 -->

@@ -1,0 +1,330 @@
+<!-- Steve Delgado
+Lab 2 Html -->
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Lab 2</title>
+		<style>
+			body{
+				margin: 0px;
+				padding: 0px;
+				background-color: teal;
+			}
+
+			h1{
+				color: Green;
+				text-align: center;
+			}
+
+			#header{
+				color: white;
+				background-color: black;
+				text-align: center;
+				padding: 5px;
+			}
+
+			button{
+				border-style: none;
+				background-color: #4CAF50; /* Green */
+				color: white;
+				text-align: center;
+				display: inline-block;
+				font-size: 3ex;
+				margin: 2px 2px 2px 2px;
+				cursor: pointer;
+				border-radius: 5px;
+				vertical-align: middle;
+				float: right;
+				align-self: center;
+			}
+
+			button:hover{
+				background-color: orange;
+			}
+			.button0{ width: 100%; }
+			.clear{ background-color: red; }
+			.shift{ background-color: gray; }
+			.saveButton{ 
+				width: 100%; 
+				background-color: yellow;
+				color: blue;
+			}
+			.block{
+				display: inline-block;
+				background-color: purple;
+				margin: 2ex 2ex 2ex 2ex;
+ 				padding: 1ex;
+				vertical-align: top;
+				border-radius: 5px;
+				float: left;
+			}
+
+			h3{
+				text-align: center;
+			}
+
+			.blockError{
+				background-color: red;
+			}
+
+			span.noError{
+				display: none;
+			}
+
+			span.error{
+				color: yellow;
+				font-size: 2ex;
+			}
+
+			form{
+				word-wrap: all;
+			}
+			input{
+				color: blue;
+			}
+	</style>
+	<!--  -->
+	<script type="text/javascript">
+		//used to save hours so they differ from calculator
+		var saved;
+
+		function init(){
+			document.getElementById("submit").addEventListener("click", checkSubmit, false);			
+			var numButton = document.getElementsByClassName("calcButton");
+			for (var i = 0; i <= numButton.length; i++) {
+				//try catch needed to not get error of undefined in console
+				try{
+    				if(typeof numButton[i] !== 'undefined') {
+        				numButton[i].addEventListener("click", calcDisplay, false);
+    				}
+  				}catch(e){
+   					console.log('button not pressed; numbutton is undefined'); 
+  				}
+					
+			}
+		}
+
+		function checkSubmit(e){
+
+			//globals 
+			var formBool = true;
+			var values = new Array(firstName,lastName, studentId, bio);
+			var firstName = document.getElementById("firstName");
+			var lastName = document.getElementById("lastName");
+			var studentId = document.getElementById("studentId");
+			var hours = document.getElementById("hours");
+			var bio = document.getElementById("bio");
+			//var result = document.getElementById("result");
+			
+			console.log(bio.value.split(" "));
+			var parseBio = bio.value.split(" ");
+			var bioCount = bio.value.split(" ").length;	
+			//used to keep track of how many words are actually in the bio this is based on spaces
+			//and eliminating the 
+			for (var i = 0; i< bio.value.split(" ").length	; i++){
+				if(parseBio[i] == ""){
+					console.log(parseBio[i]);
+					bioCount--;
+				}
+			}
+
+			console.log(bioCount);
+			console.log(parseBio);
+
+			e.preventDefault();
+			//console.log(studentId.value.length);
+
+			//check to see if there is 9 digits in student ID and they are all numbers and not empty 
+			if(isNaN(studentId.value) || studentId.value.length !== 9){
+				formBool = false;
+				document.getElementById("sidError").innerHTML ="<br/>Invalid 9 digit student ID";
+				document.getElementById("sidError").className = "error";
+				//console.log(formBool);
+			}
+			else{
+				formBool = true;
+				document.getElementById("sidError").innerHTML = "";
+				document.getElementById("sidError").className = "noError";
+			}
+			//console.log(firstName.value[0]);
+			console.log(firstName.value);
+
+			//check errors with first name
+			if(firstName.value == ''){
+				formBool = false;
+				document.getElementById("fnError").innerHTML = "<br/>Enter your name";
+				document.getElementById("fnError").className = "error";
+			} // ^checks empty 
+			else if(firstName.value[0] !== firstName.value[0].toUpperCase()){
+				formBool = false;
+				document.getElementById("fnError").innerHTML = "<br/>Capitalize First Name";
+				document.getElementById("fnError").className = "error";
+			}// ^checks capital letter 
+			else{
+				formBool = true;
+				document.getElementById("fnError").innerHTML = "";
+				document.getElementById("fnError").className = "noError";
+			}// ^no errors
+
+			//checks last name for errors
+			if(lastName.value == ''){
+				formBool = false;
+				document.getElementById("lnError").innerHTML = "<br/>Enter your name";
+				document.getElementById("lnError").className = "error";
+			}// ^checks if empty
+			else if(lastName.value[0] !== lastName.value[0].toUpperCase()){
+				formBool = false;
+				document.getElementById("lnError").innerHTML = "<br/>Capitalize Last Name";
+				document.getElementById("lnError").className = "error";
+			}// ^checks if first letter is capital
+			else{
+				formBool = true;
+				document.getElementById("lnError").innerHTML = "";
+				document.getElementById("lnError").className = "noError";
+			}//^no errors
+
+
+			//checks for biography word count
+			if(bioCount >25){
+				formBool = false;
+				document.getElementById("bioError").innerHTML = "<br/>Please enter less than 25 words";
+				document.getElementById("bioError").className = "error";
+			} //^no less than 25 words
+			else{
+				document.getElementById("bioError").innerHTML = "";
+				document.getElementById("bioError").className = "noError";
+			}// ^no errors
+
+			//checks for hours submitted
+			if(isNaN(saved) || saved === undefined || saved == ''){
+				formBool = false;
+				document.getElementById("hours").innerHTML = "<font color = 'yellow'>Please use calculator to enter hours";
+			}//^ no number submited or empty
+			else if (formBool){
+				formBool = true;
+				document.getElementById("hours").innerHTML = saved;
+			}//^ form has to be true so that hours can be shown
+			else{
+				document.getElementById("hours").innerHTML = saved;
+			}// ^show saved if not true just changeing 
+
+
+			if(formBool){
+				document.getElementById("myform").className = "block";
+				validFormAlert();
+			}//^no errors send to alert to validate form
+			else
+				document.getElementById("myform").className = "blockError";
+		}
+
+		function calcDisplay(e){
+			//console.log(e.target.value);
+			//console.log(e.target.id);
+			if(e.target.id == "clear"){
+				document.getElementById("result").value = "";
+				hours = 0;
+			}
+			else if(e.target.id == "calcLeft"){
+				//console.log(hours);
+				if(document.getElementById("result").value !== ''){
+					hours =  document.getElementById("result").value << 1;
+					document.getElementById("result").value = hours;
+				}
+			}
+			else if(e.target.id == "calcRight"){
+				if(document.getElementById("result").value !== ''){		
+					hours = document.getElementById("result").value >>> 1;
+					document.getElementById("result").value = hours;
+				}
+			}
+			else if(e.target.id == "save"){
+				console.log(hours);
+				if(isNaN(hours)|| hours === undefined || hours === ''){
+					document.getElementById("hours").innerHTML = "<font color = 'yellow'>Error: not a valid number of hours worked";
+				}
+				else{
+					saved = document.getElementById("hours").innerHTML = result.value;
+					document.getElementById("hours").innerHTML = result.value;
+				}
+			}
+			else
+				document.getElementById("result").value += e.target.id[4];
+			hours = document.getElementById("result").value;
+			//console.log(hours);
+		}
+
+		function validFormAlert(){
+			alert("Form is validish. Good Job, maybe there are no bugs afterall ¯\_(ツ)_/¯!\n"+
+                  "First Name:\t"+firstName.value+"\n"+
+                  "Last Name:\t"+lastName.value+"\n"+
+                  "Student ID:\t"+studentId.value+"\n"+
+                  "Biography:\t"+bio.value+"\n"+
+                  "Calculator #:\t"+result.value+"\n"+
+                  "Hours saved:\t"+saved+"\n");
+		}
+
+		window.addEventListener("load", init, false);
+	</script>
+	</head>
+	<body>
+		<div id = "header">
+			<h1>Comp 484 Lab 2 Learn to Javaishscript</h1>
+		</div>
+		<div id = "body">
+			<form id = "myform" class = "block" method = "post" action="">
+				<h3>Register Form</h3>
+
+				<table>
+					<tr>
+						<td>First Name:<span id = "fnError" class ="noError"></span></td>
+						<td><input id = "firstName" class = "error" type="text" placeholder="Please enter first name" required></input></td>
+					</tr>
+					<tr>
+						<td>Last Name:<span id = "lnError" class ="noError"></span></td>
+						<td><input id = "lastName" class = "error" type="text" placeholder="Please enter last name" required></input></td>
+					</tr>
+					<tr>
+						<td>Student ID:<span id = "sidError" class ="noError"></span></td>
+						<td><input id = "studentId" type="text" maxlength="9" placeholder="Enter 9 digit id" required></input></td>
+					</tr>
+					<tr>
+						<td>Biography:<span id = "bioError" class ="noError"></span></td>
+						<td><textarea id="bio" placeholder="Please enter no more than 25 words"></textarea></td> 
+					</tr>
+					<tr>
+					</tr>
+				</table>
+				<label>Hours worked this week: <span id = "hours"></span></label><br/>
+				<input id = "submit" name="Submit" type="submit"/>
+			</form>
+		</div>
+		<div id = "calc" class = "block">
+			<input id = "result" type="text" disabled></input>
+			<table>
+				<tr>
+					<td><button id="calc7" class="calcButton">7</button></td>
+					<td><button id="calc8" class="calcButton">8</button></td>
+					<td><button id="calc9" class="calcButton">9</button></td>
+					<td><button id="clear" class="calcButton clear">C</button></td>
+				</tr>
+				<tr>
+					<td><button id="calc4" class="calcButton">4</button></td>
+					<td><button id="calc5" class="calcButton">5</button></td>
+					<td><button id="calc6" class="calcButton">6</button></td>
+					<td><button id="calcLeft" class="calcButton shift"><<</button></td>
+				</tr>
+				<tr>
+					<td><button id="calc1" class="calcButton">1</button></td>
+					<td><button id="calc2" class="calcButton">2</button></td>
+					<td><button id="calc3" class="calcButton">3</button></td>
+					<td><button id="calcRight" class="calcButton shift">>></button></td>
+				</tr>
+				<tr>
+					<td colspan="4"><button id="calc0" class="calcButton button0">0</button></td>
+				</tr>
+			</table>
+			<button id = "save" class="calcButton saveButton">Save</button>
+		</div>
+	</body>
+</html>

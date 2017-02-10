@@ -1,0 +1,23 @@
+a 100
+mov ah, 3d //open file
+mov al, 00 //file handler for reading files
+mov dx, 150 //file name ends in 0
+int 21 //finish
+
+mov si, ax //move file handler into si register
+mov ah, 3f // reading files
+mov bx, si //retrieve file handle
+mov cx, 10 // how many bites you wanna read
+mov dx, 200 //where do we want to send text to
+int 21
+
+mov ah, 09 // display string
+mov dx, 200 //send text to
+int 21
+int 20
+
+a 150
+db 'Whatever.txt.', 00
+
+a 200
+db 00,00,00,00,00,00,00,00,00,00,24 // definds bytes

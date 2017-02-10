@@ -1,0 +1,101 @@
+/* Steve Delgado
+Lab1 CSS */
+
+body{
+	background-color: blue;
+	border-style: solid;
+	margin: 0px;
+	padding: 0px 0px 0px 0px; 
+}
+
+html body *:hover{ background-color:yellow;}
+
+.MainPageBox{
+	width: 95%;
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+/* 	margin-left: 5px;
+	margin-right: 5px; */
+	background-color: white;		
+	border-style: solid;
+	border-width: 6px;
+	padding-top: 0px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-bottom: 464px;
+}
+
+.PageTitleBox{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: lightblue;
+	border-style: solid;
+	border-width: 1px;
+	padding-right: 30px;
+	text-align: right;
+}
+
+.PageTitleBox h2{
+	font-size:1.2em;
+	text-align:right;
+}
+
+.BlogEntryBox{
+	margin-bottom: 10px;
+	background-color: green;
+	border-style: solid;
+	border-width: 1px;
+	width: 70%;
+	height: 30%;
+	float: right;
+	padding-left: 25px;
+	overflow: auto;
+	z-index: 3;
+	/* text-overflow: ellipsis; */
+}
+
+.BlogEntryBox img{
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 10px;
+	width: 25%;
+	height:auto;
+	max-height:100%;
+	max-width: 100%;
+}
+
+.FriendsBox{
+	background-color:purple;
+	border-style: solid;
+	border-color: black;
+	border-width: 4px;
+	width: 20%;
+	height: auto;
+	float: left;
+	color: white;
+	overflow: auto;
+	text-align: left;
+}
+
+.FriendsList {
+	text-decoration:none;
+	color:white;
+	text-align: left
+}
+
+
+.FriendsList:hover{
+	text-decoration:underline;
+	color:red;
+}
+
+.PText{
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 70%;
+	height: auto;
+	text-align: justify;
+}

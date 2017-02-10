@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>A simple single-page PHP form</title>
+    </head>
+    <body>
+        <h1>A very simple PHP script</h1>
+        <p>Page 1 displays a form</p>
+        <p>Page 2 reads variables from the form, and provides output</p>
+        <br><br>
+        <hl>
+        
+        <?php
+            $pageNum = 0;
+            if( isset($_GET["page"]) )
+            {
+                $pageNum = $_GET["page"];
+                settype($pageNum, "integer");
+            }
+            else
+            {
+                $pageNum = 1;
+            }
+
+            if($pageNum > 2 || $pageNum < 1)
+            {
+                echo("<strong>Error...this page does not exist!</strong></body></html>");
+                die();
+            }
+
+            echo ("<strong>This is page# $pageNum</strong>");
+            if($pageNum == 1)
+            {
+        ?>
+            <form method="get" 
+                action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                
+                <input type="hidden" name="page" value="2">
+                <p><label>Your full name: 
+                    <input type="text" name="yourname">
+                </label></p>
+                <p><label>Your major:
+                    <input type="text" name="major">
+                </label></p>
+                <p><input type="submit" value="SUBMIT"></p>
+            </form>
+        <?php
+            } else { // $pageNum == 2
+                $username = $major = "";
+                if (isset($_GET["yourname"]) 
+                    && $_GET["yourname"] != ""
+                    && isset($_GET["major"])
+                    && $_GET["major"] != "")
+                {
+                    $username = $_GET["yourname"];
+                    $major = $_GET["major"];
+                }
+                else
+                {
+                    echo("<p><strong>Error...your info was not received properly...!</strong></p></body></html>");
+                    die();
+                }
+        ?>
+            <p> Hello <?php echo $username; ?>, it is nice
+            to meet a <?php echo $major; ?> major!
+
+            <form method="get" 
+                action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                
+                <input type="hidden" name="page" value="1">
+                <p><input type="submit" value="Back to Page 1"></p>
+            </form>
+            
+        <?php
+            }
+        ?>
+
+        <hl><br><br><br>
+        <p> source code for this example: <a href="index_php.txt">here</a></p>
+    </body>
+</html>

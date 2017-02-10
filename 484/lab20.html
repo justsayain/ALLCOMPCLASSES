@@ -1,0 +1,297 @@
+<!-- Steve Delgado
+Lab 2 Html -->
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Lab 2 Calculate</title>
+		<style>
+			body {
+				margin: 0px;
+				padding: 0px;
+				background-color: teal;
+			}
+			
+			h1{
+				color: Green;
+				text-align: center;
+			}
+
+			#header {
+				background-color: black;
+				color: white;
+				text-align: center;
+				padding: 5px;
+			}
+			#fieldSet {
+				float: left;
+				width: 50%;
+				height: 90%;
+				height: auto;
+				border-style: solid;
+				margin: 0px;
+				padding: 0px;
+
+			}
+			
+			button {
+				border-style: none;
+				background-color: #4CAF50; /* Green */
+				color: white;
+				text-align: center;
+				display: inline-block;
+				font-size: 3ex;
+				margin: 2px 2px;
+				cursor: pointer;
+				border-radius: 5px;
+				vertical-align: middle;
+				float: right;
+				position: relative;
+
+			}
+			button:hover{
+				background-color: orange;
+			}
+			.button0{width: 100%;}
+			.saveButton{width: 100%;}
+			#invalidHours {
+				text-transform: uppercase;
+				color: yellow;
+				font-weight: bolder;
+			}
+			.block{
+	            display: inline-block;
+	            background-color: purple;
+	            margin: 1ex;
+	            padding: 1ex;
+	            vertical-align: top;
+	            border-radius: 5px;
+	            float: left;	            
+        	}
+        	.blockError{
+	            display: inline-block;
+	            background-color: red;
+	            margin: 1ex;
+	            padding: 1ex;
+	            vertical-align: top;
+         	}
+         	span.noError{
+         		display: none;
+         	}
+         	span.error{
+         		color: orange;
+         		font-size: 1ex;
+         	}
+
+    </style>
+    <script>
+		var firstName, lastName, id, hours, bio, values;
+        var current, calcButton, myForm;
+        
+        var helpArray = ["Enter your first name, capitalized, in this box.",
+        	"Enter your last name, capitalized, in this box.",
+        	"Please enter your 9 digit student ID.",
+        	"Maximum of 25 words for this section.", ""];
+        var helpText;
+//assigns variable to elements
+         function init(){
+            initListeners();
+            initVar();
+            initEvent();
+         }
+
+         function initListeners(){
+         	registerListeners(document.getElementById("firstName"), 0);
+         	registerListeners(document.getElementById("lastName"), 1);
+         	registerListeners(document.getElementById("studentId"), 2);
+         	registerListeners(document.getElementById("bio"), 3;
+
+         	myForm= document.getElementById("myForm");
+         	myForm.addEventListener("submit", function(){
+         		return confirm("are you sure you want to submit?");
+         	}, false);
+         }
+
+         //initiates all global variables
+         function initVar(){
+            firstName = document.getElementById("firstName");
+            lastName = document.getElementById("lastName");
+            StudentId = document.getElementById("id");
+            bio = document.getElementById("bio");
+            hours = document.getElementById("hours");
+            values = new Array(firstName, lastName, id, email, bio);
+            result = document.getElementById("result");
+            //tempVal = document.getElementById("tempVal");
+            calcButton = document.getElementsByClassName("calcButton");
+         }
+
+        
+         //adds event listeners to global variables
+         function initEvent(){
+            // document.getElementById("submit").addEventListener("click", submitClick, false);
+            document.getElementById("save").addEventListener("click", saveClick, false);
+
+             result.addEventListener("keydown", resultTyped, false);
+            // result.addEventListener("focus", setClearResult, false);
+            // result.addEventListener("blur", unsetClearResult, false);
+            for(var i=0; i<calcButton.length; i++){
+            		calcButton[i].addEventListener("click", displayDigit, false);
+	            }
+         }
+
+         function registerListeners(object, messageNum){
+         	object.addEventListener("focus", function(){
+         		helpText.innerHTML	= helpArray[messageNum];
+         	}, false);
+         }
+
+         function displayDigit(e){
+         	if(e.target.id.)
+         }
+
+         function setClearResult(){
+         	current = "0";
+            document.calc.display.value = current;
+         }
+         function unsetClearResult(){
+            clearResult=false;
+         }
+
+
+
+         //checks whether the value in "result" is a number or not
+         function checkInput(){
+            if(isNaN(result)){
+               result = "ERROR: press C";
+               return false;
+            }else{
+               return true;
+            }
+         }
+
+         //Clears result box if new entry is typed
+         function resultTyped(e){
+            if(clearResult){
+               clearResult = false;
+               result= "";
+            }
+         }
+
+         //Save button clicked
+         function saveClick(e){
+            if(checkInput()){
+               hours.innerHTML = result;
+            }else{
+               hours.innerHTML = "<br/>\n\
+                  <span class='error'>-Not a valid number!</span>";
+            }
+         }
+
+         //Submit button clicked
+         function submitClick(e){
+            var formBool = true; //Flags whether form is valid or not
+            e.preventDefault();  //Prevents the form being submitted.
+            for(var i=0; i<values.length; i++){  //Checks for any emtpy input
+               if(values[i] === ""){
+                  formGood = false;
+                  document.getElementById(values[i].name+"Error").className = "error";
+                  document.getElementById(values[i].name+"Error").innerHTML = "<br/>Required";
+               }else{
+                  document.getElementById(values[i].name+"Error").className = "noError";
+               }
+            }
+
+            if(firstName.charAt(0).toUpperCase() === firstName.charAt(0) ){
+            	window.alert('is uppercase');
+            }
+            else{
+            	window.alert('not');
+            }
+
+            if(isNaN(id) || id.length !== 9){   //checks if ID is valid
+               formGood = false;
+               document.getElementById("idError").innerHTML = "<br/>Invalid ID";
+               document.getElementById("idError").className = "error";
+            }
+
+            if(formGood){ //changes background-color according to its validity
+               document.getElementById("regForm").className="block";
+               alertSummary();
+            }else{
+               document.getElementById("regForm").className="blockError";
+            }
+         }
+
+         //Reports summary of inputs
+         function alertSummary(){
+            alert("Submission Successful!\n"+
+                  "First Name:\t"+firstName+"\n"+
+                  "Last Name:\t"+lastName+"\n"+
+                  "Student ID:\t"+id+"\n"+
+                  "email:\t"+email+"\n"+
+                  "biography:\t"+bio+"\n"+
+                  // "calc:\t"+result+"\n"+
+                  // "hours:\t"+hours.innerHTML+"\n");
+         }
+
+         window.addEventListener("load", init, false);
+    </script>
+	</head>
+	<body>
+		<div id="header">
+			<h1>COMP 484 Lab 2 Learn to Calculator /s</h1>
+		</div>
+		<div id="body">
+			<form id="myForm" class ="block" method="post" action="#">
+            <h5>Register Form</h5>
+            <table>
+               <tr>
+                  <td>First Name:<span id="firstNameError" class="noError"></span></td>
+                  <td><input id="firstName" class="error" name="firstName" type="text" required/></td>
+               </tr>
+               <tr>
+                  <td>Last Name:<span id="lastNameError" class="noError">test</span></td>
+                  <td><input id="lastName" name="lastName" type="text" required/></td>
+               </tr>
+               <tr>
+                  <td>Student ID:<span id="idError" class="noError"></span></td>
+                  <td><input id="studentId" name="id" type="text" maxlength="9" required/></td>
+               </tr>
+               <tr>
+                  <td>Biography:<span id="bioError" class="noError"></span></td>
+                  <td><textarea id="bio" name="bio" maxlength="25"></textarea></td>
+               </tr>
+            </table>
+            <input type="submit" value="Submit" />
+         </form>
+	</div>
+	<div id="calc" class="block">
+            <input id="result" type="text" />
+            <table>
+               <tr>
+                  <td><button id="calc7" class="calcButton">7</button></td>
+                  <td><button id="calc8" class="calcButton">8</button></td>
+                  <td><button id="calc9" class="calcButton">9</button></td>
+                  <td><button id="calcClear" class="calcButton">C</button></td>
+               </tr>
+               <tr>
+                  <td><button id="calc4" class="calcButton">4</button></td>
+                  <td><button id="calc5" class="calcButton">5</button></td>
+                  <td><button id="calc6" class="calcButton">6</button></td>
+                  <td><button id="calcLeft" class="calcButton"><<</button></td>
+               </tr>
+               <tr>
+                  <td><button id="calc1" class="calcButton">1</button></td>
+                  <td><button id="calc2" class="calcButton">2</button></td>
+                  <td><button id="calc3" class="calcButton">3</button></td>
+                  <td><button id="calcRight" class="calcButton">>></button></td>
+               </tr>
+               <tr>
+                  <td colspan="4"><button id="calc0" class="calcButton button0">0</button></td>
+               </tr>
+            </table>
+            <button id="save" class="calcButton saveButton">Save</button>
+         </div>
+		
+	</body>
+</html>

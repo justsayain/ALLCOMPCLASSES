@@ -1,0 +1,279 @@
+
+<!--
+
+Steve Delgado
+Lab3.html
+Javascript and google maps api
+
+-->
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>lab3</title>
+      <style type="text/css">
+        h1   { 
+            text-align:center;
+        }
+        html { 
+            height: 100%;
+        }
+        body { 
+            height: 100%; 
+            margin: 0; 
+            padding: 0;
+            background-color: yellow;
+        }
+        #container{
+            position: relative;
+        }
+        #map-canvas {
+            position: relative;
+            height: 600px;
+        }
+        #questionBox{
+            position: absolute; 
+            top: 2%;  
+            z-index: 1;
+            width: 100%;
+            background-color: yellow; 
+        }
+        #end {
+            color: white;
+        }
+        #animate{
+            visibility: hidden;
+            position: absolute;
+            z-index: 2;
+            border-style: solid;
+            margin-left: 0px;
+            background-color: purple;
+            height: auto;
+            left: 20%; /* mid for score display */
+            text-align: center;
+        } 
+      </style>
+
+      <script type="text/javascript" 
+         src="https://maps.googleapis.com/maps/api/js?libraries=geometry">
+      </script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+      <script type="text/javascript">
+        var map;
+        var countQ = 0;
+        var countW = 0;
+        var totalQ = 5;
+        var q;
+        var building = ["Parking Lot B5", "Live Oak Hall", "Eucalyptus Hall", "Student Recreation Center", "Oviatt Library",];
+        var quadCoords = [[
+                {
+                    lat: 34.241918,
+                    lng: -118.533307
+                }, {
+                    lat: 34.241918,
+                    lng: -118.531915
+                }, {
+                    lat: 34.241228,
+                    lng: -118.531915
+                }, {
+                    lat: 34.241228,
+                    lng: -118.533307
+                }
+            ],
+            [
+                {
+                    lat: 34.238360,
+                    lng: -118.528733
+                }, {
+                    lat: 34.238360,
+                    lng: -118.527668
+                }, {
+                    lat: 34.238170,
+                    lng: -118.527668
+                }, {
+                    lat: 34.238170,
+                    lng: -118.528733
+                }
+            ],
+            [
+                {
+                    lat: 34.238763,
+                    lng: -118.528755
+                },{
+                    lat: 34.238763,
+                    lng: -118.527671
+                }, {
+                    lat: 34.238550,
+                    lng: -118.527671
+                }, {
+                    lat: 34.238550,
+                    lng: -118.528755
+                }
+            ],
+            [
+                {
+                    lat: 34.240616,
+                    lng: -118.525166
+                },{
+                    lat: 34.240616,
+                    lng: -118.524662
+                }, {
+                    lat: 34.2393349,
+                    lng: -118.524662
+                }, {
+                    lat: 34.2393349,
+                    lng: -118.525166
+                }
+            ],
+            [
+                {
+                    lat: 34.240394,
+                    lng: -118.530035
+                }, {
+                    lat: 34.240394,
+                    lng: -118.528616
+                }, {
+                    lat: 34.239900,
+                    lng: -118.528616
+                }, {
+                    lat: 34.239900,
+                    lng: -118.528901
+                }, {
+                    lat: 34.239760,
+                    lng: -118.528901
+                }, {
+                    lat: 34.239760,
+                    lng: -118.529759
+                }, {
+                    lat: 34.239902,
+                    lng: -118.529759
+                }, {
+                    lat: 34.239902,
+                    lng: -118.530035
+                },
+            ]
+
+        ];
+        // create a polygon to generate onto the map
+        function createGreenPoly() {
+            // console.log(countQ);
+            // console.log(quadCoords[0]);
+            // console.log(quadCoords[countQ]);
+            var coord = quadCoords[countQ];
+            var currentPoly = new google.maps.Polygon({
+                paths: coord,
+                strokeColor: "#00FF00",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#00FF00",
+                fillOpacity: 0.35
+            });
+            return currentPoly;
+        }
+
+        function doubleClicked(e) {
+            var currentPoly = createGreenPoly();
+            if (google.maps.geometry.poly.containsLocation(e.latLng, currentPoly)){
+                // currentPoly.strokeColor ;
+                q.innerHTML = "Good Job";
+            }
+            else{
+                currentPoly.strokeColor = currentPoly.fillColor = "#ff0038";
+                q.innerHTML = "Terrible Job, Here it is";
+                countW++;
+            }
+            currentPoly.setMap(map);
+            countQ++;
+            askQuestion();
+        }
+
+        function endOfQuestions() {
+            document.getElementById("finish").innerHTML = "You got " + (totalQ - countW) + " out of 5 correct answers!";
+            q.innerHTML = "Quiz finished";
+             $("div#animate").css({
+                    visibility: 'visible'
+                });
+            var elem = document.getElementById("animate");
+            var pos = 0;
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (pos == 300) {
+                  clearInterval(id);
+                } else {
+                  pos++; 
+                  elem.style.top = pos + 'px'; 
+                  elem.style.left = pos + 'px'; 
+                }
+            }
+         }
+
+         function restart(e){
+            countQ = 0;
+            countW = 0;
+            map.setMap(null);
+            askQuestion();
+            e.preventDefault();
+         }
+         
+        function init () {
+            q = document.getElementById("question");
+
+            var mapOptions = {
+               center: new google.maps.LatLng(34.240294, -118.528183),
+               zoom: 17,
+               mapTypeId: google.maps.MapTypeId.ROADMAP,
+               disableDoubleClickZoom: true,
+               disableDefaultUI: true,
+               zoomControl: false,
+               draggable: false,
+               scrollwheel: false,
+               styles: [
+                {
+                    elementType: "labels",
+                    stylers: [
+                        {
+                            visibility: "off"
+                        }
+                    ]
+                }
+            ]
+            };
+            map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);   
+
+            askQuestion();
+            google.maps.event.addListener(map, 'dblclick', doubleClicked);
+            document.getElementById("restart").addEventListener("click", restart, false);
+         }
+
+         
+         function askQuestion() {      
+            if(countQ<totalQ){
+                var bString = building[countQ];
+                setTimeout(function(){q.innerHTML = "Where is " + bString+"?";}, 1500);
+            }
+            else{
+                console.log("endOfQuiz");
+                endOfQuestions();
+            }
+            
+            console.log(countQ);
+         }
+
+         window.addEventListener("load", init, false);
+      </script>
+   </head>
+   <body>
+        <div id="container">
+            <!-- <div id="animate"><h1 id="finish"></h1></div> -->
+            <div id="map-canvas"></div>
+            <div id="questionBox"><h1 id="question">Lab 3 Questions & Animation</h1></div>       
+        </div>
+        <div id="animate"><h1 id="finish"></h1>
+            <b><p id="quizPara">Quiz has ended!</p>
+            <hr>
+            <a id="restart" href="">Restart</a>
+        </div>
+   </body>
+</html>
