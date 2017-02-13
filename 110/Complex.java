@@ -1,55 +1,52 @@
 import java.util.*;
-   class Complex{
+
+class Complex{
       private double real;
       private double imag;
-      public Complex() { 
+      public Complex() {
 			this.real=0.0;
 			this.imag=0.0;
 		}
-		
-      public Complex(double re, double im) { 
+
+      public Complex(double re, double im) {
 			this.real=re;
 			this.imag=im;
 		}
-      public Complex plus(Complex c) { 
+      public Complex plus(Complex c) {
 			Complex result = new Complex();
 			result.real= this.real+c.real;
 			result.imag= this.imag+c.imag;
          return result;
-			
+
 		//return new Complex(this.real+c.real, this.imag+c.imag);
 		}
-      public Complex minus(Complex c) { 
+      public Complex minus(Complex c) {
 			Complex result = new Complex();
 			result.real= this.real-c.real;
 			result.imag= this.imag-c.imag;
          return result;
       }
-      public Complex times(Complex c) { 
+      public Complex times(Complex c) {
          Complex result = new Complex();
 			result.real= this.real*c.real - this.imag*c.imag;
 			result.imag= this.real*c.imag + this.imag*c.real;
          return result;
 		}
-      public Complex divide(Complex c) { 
+      public Complex divide(Complex c) {
          Complex result = new Complex();
 			result.real= this.real/c.real;
 			result.imag= this.imag/c.imag;
          return result;
 		}
-   
-   
-   
-   
-   
-      public String toString() { 
+      public String toString() {
          String s= "";
          s=s+this.real+" + "+this.imag+"i";					//real #(3,5) ---- 3+5i
          return s;
       }
-	}
+}
+
 class ComplexDriver{
-		public static void main(String[]args){
+		public static void main(String[] args){
 			Complex x= new Complex();						//default constructor
 			Complex c= new Complex(3,5);
 			Complex d= new Complex(4,4);
@@ -63,4 +60,4 @@ class ComplexDriver{
 			System.out.println(g.toString());
 			System.out.println(h.toString());
 		}
-   }
+}
