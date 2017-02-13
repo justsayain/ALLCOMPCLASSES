@@ -2,7 +2,7 @@ import java.util.*;
 
 //Steve Delgado
 //Comp 110 lab exam 1
-//3/20/19
+//3/20/12
 
 public class LabExamOne{
 
