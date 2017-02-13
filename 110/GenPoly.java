@@ -6,24 +6,25 @@ Polygon Evaluator Version 3 */
 import java.util.*;
 
 public class GenPoly{
+
 	public static void main(String[]args){
 		Scanner input = new Scanner(System.in);
 		double [] c;
 		double y=0,x;
 		int degree;
 		System.out.print("Enter Degree of Polynomial: ");
-		degree= input.nextInt();
-		c= new double[degree+1];
+		degree = input.nextInt();
+		c = new double[degree+1];
 		for (int i=0;i<c.length;i++){
-			System.out.print("Please Enter Coefficient "+i+": "); 
+			System.out.print("Please Enter Coefficient "+i+": ");
 			c[i] = input.nextDouble();
 		}
 		System.out.print("Enter x: ");
 		x = input.nextDouble();
+		//Evaluates polygon through formula of a polygon. 
 		for(int i=0;i<c.length;i++){
-			
 			y += c[i]*Math.pow(x,i);
 		}
 		System.out.println("Value: "+y);
 	}
-}		
+}
