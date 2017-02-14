@@ -1,3 +1,8 @@
+/*
+Programmer: Steve Delgado
+Simple java program to output a pyramid of stars
+using two for loops.
+*/
 public class stars{
 	public static void main(String[]args){
 	 	int n=6;
