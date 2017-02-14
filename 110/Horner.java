@@ -1,9 +1,4 @@
-/* Programmer: Steve Delgado
-Comp 110/110L Spring 2013 Mon/Wed 8-11am
-Project 3: Part 3
-Polygon Evaluator Version 3 */
-
-   import java.util.*;
+import java.util.*;
 
    public class Horner{
       public static double createintegral(double [] c, double x){
@@ -11,12 +6,11 @@ Polygon Evaluator Version 3 */
          double y=c[0];
          double power =x;
          for(int i=1;i<c.length;i++){
-         
             y += c[i]*power;
             power*=x;
          }
          return y;
-      			
+
       }
       public static void main(String[]args){
          Scanner input = new Scanner(System.in);
@@ -27,17 +21,10 @@ Polygon Evaluator Version 3 */
          degree= input.nextInt();
          c= new double[degree+1];
          for (int i=0;i<c.length;i++){
-            System.out.print("Please Enter Coefficient "+i+": "); 
+            System.out.print("Please Enter Coefficient "+i+": ");
             c[i] = input.nextDouble();
          }
-      	// create start x, stop x, step;
-      	//start x 
-      	//stop x
-      	// step
-      	//for(double x= startx; x<=stopx;x+=step){
-      	//double y = evalpoly(c,x)
-      	//print (x+","+y);
-      	//}
+
          System.out.print("Enter an x you want to begin with: ");
          startx = input.nextDouble();
          System.out.print("Enter an x where you want to stop: ");
@@ -49,6 +36,6 @@ Polygon Evaluator Version 3 */
             double y = createintegral(c,x);
             System.out.println(x+" ,"+y);
          }
-         
+
       }
    }
