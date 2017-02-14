@@ -12,7 +12,7 @@ public class StringDemo2{
 		}
 		return numspaces+1;
 	}
-	//method to split string
+	//method to split string 
 	public static String[] split(String s){
 		 String []result= new String[count(s)];
 

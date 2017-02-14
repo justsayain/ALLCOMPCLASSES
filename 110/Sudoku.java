@@ -114,7 +114,7 @@
             else if(cmd.equals("show"))
                show();
             else if(cmd.equals("load"))
-               load("testfile.txt");
+               load("clues.txt");
 
             else if(cmd.equals("set")){
                int r= Integer.parseInt(t[1]);
