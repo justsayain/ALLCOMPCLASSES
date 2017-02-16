@@ -3,12 +3,14 @@ public class test2 {
    public static void main(String[] args) {
      String182 s1= new String182("catatonic");
      System.out.println(s1);
-     s1.removeChar('a');
+     String182 a = new String182("a");
+     s1.remove(a);
      System.out.println(s1);
+     System.out.println(s1.myName());
 }
 }
 /*  My output
- 
+
 Phase 1.
 str1: 182, len = 3  str2: comp, len = 4
 str1: 182, len = 3  str2: , len = 0

@@ -18,10 +18,11 @@ public class test3 {
             System.out.print("outm: ");
             s.outm();
             System.out.print("  ");
-           // if (s.biggest() < 0)
-           //     System.out.print("   empty string.");
-           //  else
-           //     System.out.print("   biggest: " + s.biggest());
+            if (s.biggest() < 0)
+                System.out.print("   empty string.");
+             else
+                System.out.print("   biggest: " + s.biggest());
+
             System.out.print("  sort: ");
             //s.insertionSort();
             //s.out();
@@ -86,8 +87,8 @@ rev: oeC   reved: oeC
 rev: rM   reved: rM
 1:  out: V  outm: V     biggest: 0  sort: V
 rev: V   reved: V
-0:  out:   outm:      empty string.  sort: 
-rev:    reved: 
+0:  out:   outm:      empty string.  sort:
+rev:    reved:
 1:  out: zpcydmpnficiuyx  outm: zpcydmpnficiuyx     biggest: 0  sort: ccdfiimnppuxyyz
 rev: zyyxuppnmiifdcc   reved: zyyxuppnmiifdcc
 2:  out: muvpdttvvydrdxt  outm: muvpdttvvydrdxt     biggest: 9  sort: dddmprtttuvvvxy
