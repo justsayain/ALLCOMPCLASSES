@@ -58,7 +58,7 @@ public class StableMatchingProject{
        arr[b]= arr[a];
        arr[a]=temp;
    }
-
+   //checks to see if matching contains no instabiliteies
   public static boolean isStable (int men[][], int women[][], int n, int arr[]){
       int womDepends[] = new int[n];
       for (int i = 0; i < n; i++)
@@ -93,7 +93,6 @@ public class StableMatchingProject{
     System.out.println("]");
   }
   //calls GSStable class to perform gayle shapley's algorithm
-  //not finished working completeley
   public static void gsStable(int [][] males,int [][]females, int size){
 
     int[] m = new int [size];
@@ -110,40 +109,38 @@ public class StableMatchingProject{
 
 public static void main(String args[]){
     Scanner file = new Scanner(System.in);
-    try{
-      file = new Scanner(new File(args[0]));
-      while(file.hasNext()){
 
-        int size = file.nextInt();
-        System.out.println(size);
-        int manPref[][] = getPref(size,file);
-        int womPref[][] = getPref(size,file);
-        //printMatrix(manPref, size);
-        //System.out.println();
-        //printMatrix(womPref, size);
-        //long startBF=System.nanoTime();
-        //System.out.println("Brute Force");
-        //bruteForce(manPref,womPref,size);
-        //long endBF =System.nanoTime();
-        //System.out.println("Runtime: " + (endBF - startBF)/1000000 + "ms");
-        long startGS = System.nanoTime();
-        System.out.println("GS Stable");
-        gsStable(manPref,womPref,size);
-        System.out.println("Runtime: " + (System.nanoTime() - startGS)/1000000 + "ms");
-        //System.out.println();
-      }
+    try{
+
+      file = new Scanner(new File(args[0]));
     }
     catch(IOException e){
       //e.errorMessage();
     }
+    //looked at online source and having issues with it reading numbers from 150-300
+    while(file.hasNext()){
 
+      int size = file.nextInt();
+      System.out.println(size);
+      int manPref[][] = getPref(size,file);
+      int womPref[][] = getPref(size,file);
+      printMatrix(manPref, size);
+      System.out.println();
+      printMatrix(womPref, size);
+      long startBF=System.nanoTime();
+      System.out.println("Brute Force");
+      bruteForce(manPref,womPref,size);
+      long endBF =System.nanoTime();
+      System.out.println("Runtime: " + (endBF - startBF)/1000000 + "ms");
+      long startGS = System.nanoTime();
+      System.out.println("GS Stable");
+      gsStable(manPref,womPref,size);
+      System.out.println("Runtime: " + (System.nanoTime() - startGS)/1000000 + "ms");
+      System.out.println();
 
-
+    }
 
   }
 
 
-
-
-  //public
 }
